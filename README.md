@@ -118,14 +118,14 @@ Current milestone: **Initial Project & Repository Setup** (April-May 2025)
 
 ## 👥 Team
 
-- **digipaga.eth** - Project Lead
-- **ozkite.eth** - Smart Contract Developer
-- **0xb343...9753e1** - Frontend Developer
+- **digipaga.eth** - Project Name
+- **ottox.eth** - Blockchain and Smart Contract Developer
+- **ozkite.eth** - Frontend Developer and Product
 
 ## 🔗 Links
 
 - [Demo Video](https://example.com) (Coming soon)
-- [Pitch Deck](https://example.com) (Coming soon)
+- [Pitch Deck](https://docs.google.com/presentation/d/1N8hZBFzToFdz2P6cBeOaKRubEp4MIh6XRI-McPTWDK8/edit?usp=sharing) 
 - [KarmaGAP Profile](https://gap.karmahq.xyz/project/digipagaeth)
 
 ---
@@ -134,5 +134,5 @@ Current milestone: **Initial Project & Repository Setup** (April-May 2025)
   
   *Built for the [Global Stablecoin Hackathon](https://mentolabs.notion.site/Global-Stablecoin-Hackathon-1c1a2148cc5c808aa42ddee1e3df7883) (May 2025)*
   
-  **Digi Paga** | [GitHub]([https://github.com/ReFi-Starter](https://github.com/digimercados/Digipaga)) | [Website](https://refistarter.org)
+  **Digi Paga** | [GitHub](https://github.com/digimercados/Digipaga)) | [Website](https://digipaga.com)
 </div>
