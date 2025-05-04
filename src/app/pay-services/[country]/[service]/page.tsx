@@ -13,7 +13,7 @@ import { getCountryName, getCurrencyByCountry, getProvidersByCountryAndCategory 
 import { getActiveStablecoins } from "@/lib/token-contracts"
 import { TokenContractDetails } from "@/components/token-contract-details"
 import { TransactionStatus } from "@/components/transaction-status"
-import { PaymentProcessor } from "@/components/payment-processor"
+import { MentoPaymentProcessor } from "@/components/mento-payment-processor"
 import { MiniPayStatus } from "@/components/minipay-status"
 import {
   Dialog,
@@ -52,6 +52,12 @@ export default function ServicePaymentPage({ params }) {
   const [selectedToken, setSelectedToken] = useState(activeStablecoins[0]?.symbol || "cUSD")
   const [isComplete, setIsComplete] = useState(false)
   const [txHash, setTxHash] = useState("")
+  const [paymentId, setPaymentId] = useState("")
+  const [processingStatus, setProcessingStatus] = useState("")
+  const [fiatPaymentDetails, setFiatPaymentDetails] = useState<{
+    fiatAmount: number;
+    fiatCurrency: string;
+  } | null>(null)
 
   // Get service name based on service
   const getServiceName = () => {
@@ -127,8 +133,19 @@ export default function ServicePaymentPage({ params }) {
     }, 1000)
   }
 
-  const handlePaymentSuccess = (hash: string) => {
-    setTxHash(hash)
+  const handlePaymentSuccess = (paymentDetails: {
+    txHash: string;
+    paymentId: string;
+    fiatAmount: number;
+    fiatCurrency: string;
+  }) => {
+    // Store all payment details
+    setTxHash(paymentDetails.txHash)
+    setPaymentId(paymentDetails.paymentId)
+    setFiatPaymentDetails({
+      fiatAmount: paymentDetails.fiatAmount,
+      fiatCurrency: paymentDetails.fiatCurrency
+    })
     setIsComplete(true)
   }
 
@@ -139,13 +156,28 @@ export default function ServicePaymentPage({ params }) {
       variant: "destructive",
     })
   }
+  
+  const handleProcessingStatus = (status: string) => {
+    setProcessingStatus(status)
+  }
 
   // Calculate crypto amount based on local currency amount
   const exchangeRate = 18.5 // Example: 1 cUSD = 18.5 MXN
   const cryptoAmount = amount ? (Number(amount) / exchangeRate).toFixed(2) : "0.00"
 
   if (isComplete) {
-    return <TransactionStatus success txHash={txHash} tokenSymbol={selectedToken} />
+    return (
+      <TransactionStatus 
+        success 
+        txHash={txHash} 
+        paymentId={paymentId}
+        tokenSymbol={selectedToken} 
+        fiatAmount={fiatPaymentDetails?.fiatAmount}
+        fiatCurrency={fiatPaymentDetails?.fiatCurrency}
+        billReference={accountNumber}
+        serviceProvider={provider}
+      />
+    )
   }
 
   return (
@@ -295,14 +327,34 @@ export default function ServicePaymentPage({ params }) {
                 </p>
               </div>
             </div>
+            
+            {processingStatus && (
+              <div className="p-3 bg-blue-50 rounded-lg border border-blue-200">
+                <p className="text-sm text-blue-800">
+                  <strong>Status:</strong> {processingStatus.charAt(0).toUpperCase() + processingStatus.slice(1)}
+                </p>
+                <p className="text-xs text-blue-700 mt-1">
+                  {processingStatus === 'initiating' && 'Preparing your payment...'}
+                  {processingStatus === 'sending' && 'Sending transaction to the blockchain...'}
+                  {processingStatus === 'verifying' && 'Verifying your transaction...'}
+                  {processingStatus === 'processing' && 'Processing payment with service provider...'}
+                  {processingStatus === 'complete' && 'Payment completed successfully!'}
+                  {processingStatus === 'failed' && 'There was a problem with your payment. Please try again.'}
+                </p>
+              </div>
+            )}
           </CardContent>
           <CardFooter className="px-6 pb-6">
-            <PaymentProcessor
+            <MentoPaymentProcessor
               recipientAddress={MOCK_RECIPIENT_ADDRESS}
               amount={cryptoAmount}
               tokenSymbol={selectedToken}
+              billReference={accountNumber}
+              serviceProvider={provider || 'Unknown Provider'}
+              serviceType={service}
               onSuccess={handlePaymentSuccess}
               onError={handlePaymentError}
+              onProcessing={handleProcessingStatus}
             />
           </CardFooter>
         </Card>
