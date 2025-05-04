@@ -7,9 +7,14 @@ import { ServiceCategory } from "@/components/service-category"
 import { ChevronLeft, Search } from "lucide-react"
 import { getCountryName, getServicesByCountry } from "@/lib/country-services"
 
+// Define the type for params
+interface PageParams {
+  country: string;
+}
+
 export default function CountryServicePage({ params }) {
   // Unwrap the params Promise using React.use()
-  const unwrappedParams = use(params);
+  const unwrappedParams = use(params) as PageParams;
   const { country } = unwrappedParams;
   
   const countryCode = country.toUpperCase()

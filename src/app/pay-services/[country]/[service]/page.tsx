@@ -24,12 +24,18 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 
+// Define the type for params
+interface PageParams {
+  country: string;
+  service: string;
+}
+
 // Mock recipient address - in a real app, this would come from your backend
 const MOCK_RECIPIENT_ADDRESS = "0x1234567890123456789012345678901234567890"
 
 export default function ServicePaymentPage({ params }) {
   // Unwrap the params Promise using React.use()
-  const unwrappedParams = use(params);
+  const unwrappedParams = use(params) as PageParams;
   const { country, service } = unwrappedParams;
   
   const countryCode = country.toUpperCase()

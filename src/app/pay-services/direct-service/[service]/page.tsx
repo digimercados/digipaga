@@ -10,9 +10,14 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useToast } from "@/components/ui/use-toast"
 import { ChevronLeft, Loader2 } from "lucide-react"
 
+// Define the type for params
+interface PageParams {
+  service: string;
+}
+
 export default function ServicePaymentPage({ params }) {
   // Unwrap the params Promise using React.use()
-  const unwrappedParams = use(params);
+  const unwrappedParams = use(params) as PageParams;
   const { service } = unwrappedParams;
   
   const { toast } = useToast()
