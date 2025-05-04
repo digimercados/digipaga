@@ -134,5 +134,5 @@ Current milestone: **Initial Project & Repository Setup** (April-May 2025)
   
   *Built for the [Global Stablecoin Hackathon](https://mentolabs.notion.site/Global-Stablecoin-Hackathon-1c1a2148cc5c808aa42ddee1e3df7883) (May 2025)*
   
-  **ReFi Starter** | [GitHub](https://github.com/ReFi-Starter) | [Website](https://example.com)
+  **Digi Paga** | [GitHub]([https://github.com/ReFi-Starter](https://github.com/digimercados/Digipaga)) | [Website](https://refistarter.org)
 </div>
