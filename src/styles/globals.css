@@ -1,6 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -27,8 +26,17 @@
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
-    --radius: 0.5rem
+    --radius: 0.5rem;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
+
   .dark {
     --background: 240 10% 3.9%;
     --foreground: 0 0% 98%;
@@ -53,14 +61,80 @@
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%
+    --chart-5: 340 75% 55%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
+
+/* Define theme configuration directly in CSS */
+:root {
+  --container-center: true;
+  --container-padding: 2rem;
+  --container-2xl: 1400px;
+  
+  --color-primary: #5945FD;
+  --color-primary-foreground: #FFFFFF;
+  --color-secondary: #D1F701;
+  --color-secondary-foreground: #000000;
+  
+  --border-radius-lg: var(--radius);
+  --border-radius-md: calc(var(--radius) - 2px);
+  --border-radius-sm: calc(var(--radius) - 4px);
+  --border-radius-xl: 1rem;
+}
+
+@utility border-border {
+  border-color: hsl(var(--border));
+}
+
+@utility bg-background {
+  background-color: hsl(var(--background));
+}
+
+@utility text-foreground {
+  color: hsl(var(--foreground));
+}
+
+body {
+  @apply bg-background text-foreground;
+}
+
+/* Animations */
+@keyframes accordion-down {
+  from { height: 0; }
+  to { height: var(--radix-accordion-content-height); }
+}
+
+@keyframes accordion-up {
+  from { height: var(--radix-accordion-content-height); }
+  to { height: 0; }
+}
+
+@keyframes spin-slow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@utility animate-accordion-down {
+  animation: accordion-down 0.2s ease-out;
+}
+
+@utility animate-accordion-up {
+  animation: accordion-up 0.2s ease-out;
+}
+
+@utility animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
+/* Add extra utility for text balance */
+@utility text-balance {
+  text-wrap: balance;
 }
