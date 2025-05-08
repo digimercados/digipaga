@@ -124,7 +124,7 @@ Current milestone: **Initial Project & Repository Setup** (April-May 2025)
 
 ## 🔗 Links
 
-- [Demo Video](https://example.com) (Coming soon)
+- [Demo Video](https://drive.google.com/file/d/1EBRKIy38aabT9Ov2uxNkunGZn6CeLA2h/view?usp=drivesdk) (Stablecoin Mento Celo MiniPay Hackathon)
 - [Pitch Deck](https://docs.google.com/presentation/d/1N8hZBFzToFdz2P6cBeOaKRubEp4MIh6XRI-McPTWDK8/edit?usp=sharing) 
 - [KarmaGAP Profile](https://gap.karmahq.xyz/project/digipagaeth)
 
